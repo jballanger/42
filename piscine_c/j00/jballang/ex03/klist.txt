@@ -1,0 +1,7 @@
+Credentials cache: API:39C3B4D2-B59A-4AD9-9E06-8E88CCCF277D
+        Principal: jballang@42.FR
+
+  Issued                Expires               Principal
+Aug 29 16:21:09 2016  Sep  5 16:21:09 2016  krbtgt/42.FR@42.FR
+Aug 29 16:21:10 2016  Sep  5 16:21:09 2016  ldap/ldap-proxy.42.fr@42.FR
+Aug 29 16:24:53 2016  Sep  5 16:21:09 2016  host/vgs-fn1.42.fr@42.FR
