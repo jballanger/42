@@ -6,28 +6,29 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 11:58:33 by jballang          #+#    #+#             */
-/*   Updated: 2018/04/19 12:29:50 by jballang         ###   ########.fr       */
+/*   Updated: 2018/04/19 15:32:28 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_block	find_block(t_block *last, size_t size)
+t_header	*find_block(size_t size)
 {
-	t_block	b;
+	t_header	*b;
 
-	b = base;
-	while (b && (!b->free || b->size < size))
+	b = head;
+	while (b)
 	{
-		*last = b;
+		if (b->free && b->size >= size)
+			return (b);
 		b = b->next;
 	}
-	return (b);
+	return (NULL);
 }
 
-/*t_block	extend_heap(t_block last, size_t size)
+/*t_header	extend_heap(t_header last, size_t size)
 {
-	t_block	b;
+	t_header	b;
 
 	b = mmap()
 	if (mmap(BLOCK_SIZE + size) == (void*)-1)
