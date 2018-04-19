@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 11:58:33 by jballang          #+#    #+#             */
-/*   Updated: 2018/04/19 15:32:28 by jballang         ###   ########.fr       */
+/*   Updated: 2018/04/19 15:44:39 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_header	*find_block(size_t size)
 {
 	t_header	*b;
 
-	b = head;
+	b = g_head;
 	while (b)
 	{
 		if (b->free && b->size >= size)

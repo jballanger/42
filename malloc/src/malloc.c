@@ -6,7 +6,7 @@
 /*   By: jballang <jballang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:30:06 by jballang          #+#    #+#             */
-/*   Updated: 2018/04/19 15:34:34 by jballang         ###   ########.fr       */
+/*   Updated: 2018/04/19 15:45:01 by jballang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void	*ft_malloc(size_t size)
 	header->size = size;
 	header->free = 0;
 	header->next = NULL;
-	if (!head)
-		head = header;
-	if (tail)
-		tail->next = header;
-	tail = header;
+	if (!g_head)
+		g_head = header;
+	if (g_tail)
+		g_tail->next = header;
+	g_tail = header;
 	// unlock mutex
 	return (void*)(header + 1);
 }
