@@ -1,7 +1,8 @@
 NAME = malloc
 LIBFT = lft
 SRC_NAME = main.c\
-					block.c
+	malloc.c\
+	block.c
 SRC_PATH = src
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(SRC:.c=.o)
