@@ -2,6 +2,7 @@ NAME = malloc
 LIBFT = lft
 SRC_NAME = main.c\
 	malloc.c\
+	free.c\
 	block.c
 SRC_PATH = src
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
