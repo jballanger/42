@@ -12,7 +12,7 @@
 
 #include "malloc.h"
 
-t_header	*find_block(size_t size)
+/*t_header	*find_block(size_t size)
 {
 	t_header	*b;
 
@@ -24,7 +24,7 @@ t_header	*find_block(size_t size)
 		b = b->next;
 	}
 	return (NULL);
-}
+}*/
 
 /*t_header	extend_heap(t_header last, size_t size)
 {

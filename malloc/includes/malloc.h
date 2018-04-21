@@ -23,7 +23,6 @@
 # include "../libft/libft.h"
 
 # include <sys/mman.h>
-# include <unistd.h>
 
 typedef struct		s_header
 {
@@ -34,16 +33,23 @@ typedef struct		s_header
 	struct s_header	*prev;
 }					t_header;
 
+typedef struct		s_page
+{
+	char			type;
+	void			*address;
+	size_t			available;
+	struct s_page	*next;
+}					t_page;
+
 typedef struct		s_mem
 {
-					
+	struct s_page	*pages;
 }					t_mem;
 
 t_mem				g_mem;
 
-void				*ft_malloc(size_t size);
+void				*malloc(size_t size);
 void				ft_free(void *ptr);
-t_header			*find_block(size_t size);
 void				show_alloc_memory();
 
 #endif

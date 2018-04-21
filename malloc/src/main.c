@@ -20,8 +20,10 @@ int	main(int ac, char **av)
 
 	ac = 777;
 	av = NULL;
-	ptr = f_malloc(25);
-	ptr2 = f_malloc(50);
-	ptr3 = f_malloc(7);
-	show_alloc_memory();
+	ptr = malloc(25);
+	ptr2 = malloc(50);
+	ptr3 = (char*)malloc(7);
+	ft_memcpy(ptr3, "super", 5);
+	ft_putendl(ptr3);
+	//show_alloc_memory();
 }

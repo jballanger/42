@@ -15,6 +15,7 @@ void	*ft_alloc(size_t size)
 {
 	void	*page;
 
+	ft_putendl("call to mmap");
 	page = mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1,
 		0);
 	if (page == MAP_FAILED)
@@ -22,70 +23,56 @@ void	*ft_alloc(size_t size)
 	return (page);
 }
 
-void	*ft_malloc(size_t type_max, size_t size)
+void	*ft_malloc(char type, size_t type_max, size_t size)
 {
+	t_page	*page;
 
-	if (g_mem.head)
+	page = g_mem.pages;
+	while (page && 1 == 2)
 	{
-		// find block
+		ft_putstr((page->type == 1) ? "tiny" : "small");
+		ft_putendl((type == 1) ? ":tiny" : ":small");
+		if (page->type == type && page->available >= size)
+		{
+			ft_putendl("found enough space in a page");
+			return (NULL);
+		}
+		page = page->next;
 	}
-	g_mem.head = ft_alloc(type_max);
-
-	/*t_header	*header;
-	void		*block;
-
-	header = find_block(size);
-	if (header)
-	{
-		header->free = 0;
-		return (void*)(header + 1);
-	}
-	ft_putendl("Calling mmap");
-	block = mmap(0, TINY_MAX, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE,
-		-1, 0);
-	if (block == (void*)-1)
-	{
-		// unlock mutex
-		return (NULL);
-	}
-	header = block;
-	header->size = size;
-	header->free = 0;
-	header->next = NULL;
-	if (!g_head)
-		g_head = header;
-	if (g_tail)
-		g_tail->next = header;
-	g_tail = header;
-	// unlock mutex
-	return (void*)(header + 1);*/
-
+	page = (t_page*)ft_alloc(type_max);
+	page->type = type;
+	//page->address = page;
+	page->available = type_max;
+	page->next = NULL;
+	g_mem.pages = page;
+	return ((void*)((page) /*+ sizeof(size_t)*/));
 }
 
-void	*f_malloc(size_t size)
+void	*malloc(size_t size)
 {
 	if (size <= 0)
 		return (NULL);
 	else if (size <= TINY)
-		return ft_malloc(TINY_MAX, size);
+		return ft_malloc(1, TINY_MAX, size);
 	else if (size <= SMALL)
-		return ft_malloc(SMALL_MAX, size);
+		return ft_malloc(2, SMALL_MAX, size);
 	else
-		return ft_malloc(LARGE, size);
+		return ft_malloc(3, 0, size);
 }
 
 void	show_alloc_memory()
 {
-	t_header	*header;
+	t_page	*page;
 
-	header = g_head;
-	while (header)
+	page = g_mem.pages;
+	while (page)
 	{
 		ft_putendl("----------------");
-		ft_putstr("Size: ");
-		ft_putnbr(header->size);
-		ft_putstr("\nAllocated: ");
-		ft_putendl((header->free) ? "No" : "Yes");
-		header = header->next;
+		ft_putstr("Type: ");
+		ft_putchar(page->type);
+		ft_putstr("\nAvailable: ");
+		ft_putnbr(page->available);
+		ft_putchar('\n');
+		page = page->next;
 	}
 }
